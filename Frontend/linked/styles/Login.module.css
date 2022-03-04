@@ -1,0 +1,226 @@
+.container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #36393f;
+  color: #b8b8b8;
+  height: 100%;
+  max-height: 100%;
+  min-height: 100%;
+  width: 100%;
+  max-width: 100%;
+  min-width: 100%;
+  padding-top: 1px;
+}
+
+.icon_container {
+  width: 100%;
+  height: 25%;
+  display: flex;
+  align-items: center;
+}
+.icon_container img 
+{
+  height: 23vh;
+  margin-left: 5%;
+  border-radius: 10px;
+}
+
+.login_box {
+  position: relative;
+  background-color: #2B2E33;
+  width: 50%;
+  height: 50%;
+  padding: 10px;
+  margin: 0;
+  border-radius: 10px;
+  margin-left: 25%;
+}
+
+.login_box_greeting_container {
+  margin-left: 24%;
+  width: 72%;
+  height: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid #535353;
+}
+
+.login_box_email_container {
+  width: 100%;
+  height: 16%;
+  display: flex;
+  align-items: center;
+}
+
+.login_box_password_container {
+  width: 100%;
+  height: 16%;
+  display: flex;
+  align-items: center;
+}
+
+.login_box_recovery_prompt_container {
+  width: 100%;
+  height: 16%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login_button_container {
+  width: 100%;
+  height: 16%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login_box_signup_prompt_container {
+  margin-left: 20%;
+  width: 80%;
+  height: 16%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login_input_prompt {
+  height: 100%;
+  width: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login_button {
+  margin-left: 24%;
+  height: 90%;
+  padding: 2.5%;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #2B2E33;
+  border: 1px solid #535353;
+}
+
+.login_button:hover {
+  background-color: #36393f;
+}
+
+.login_input_container {
+  height: 100%;
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login_input_container input {
+  width: 90%;
+  height: 80%;
+  border-radius: 10px;
+  text-align: center;
+  background-color: #2B2E33;
+  outline: none;
+  border: 1px solid #535353;
+  color: #b8b8b8;
+  cursor: pointer;
+}
+
+.login_box_recovery_prompt {
+  margin-left: 24%;
+}
+
+.login_box_recovery_prompt:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.login_box_signup_button {
+  margin-left: 5px
+}
+
+.login_box_signup_button:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+.tag_container 
+{
+  height: 25%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.tagline 
+{
+  margin-right: 5px;
+}
+.learn_more_link
+{
+  color: #bbbbbb;
+}
+.learn_more_link:hover
+{
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+
+
+.register_box {
+  position: relative;
+  background-color: #2B2E33;
+  width: 50%;
+  height: 50%;
+  padding: 10px;
+  margin: 0;
+  border-radius: 10px;
+  margin-left: 25%;
+}
+.university_suggestion_container{
+  height: 30%;
+  margin-left: 24%;
+  width: 72%;
+  overflow-y: scroll;
+  padding: 10px;
+  border-bottom: 1px solid #535353;
+}
+.university_suggestion_container::-webkit-scrollbar {
+  display: none;
+}
+
+.university_list_item {
+  display: grid;
+  place-items: center;
+  padding: 10px;
+  background-color: #2B2E33;
+  border: 1px solid #535353;
+  color: #b8b8b8;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 768px) {
+  .icon_container
+  {
+    height: 15%;
+  }
+  .login_box {
+    height: 65%;
+    width: 90%;
+    margin-left: 5%;
+  }
+  .register_box {
+    height: 65%;
+    width: 90%;
+    margin-left: 5%;
+  }
+  .tag_container 
+  {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+}
