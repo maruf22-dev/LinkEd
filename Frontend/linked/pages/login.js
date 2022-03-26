@@ -2,26 +2,15 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import styles from '../styles/Login.module.css'
-import universities from './universities'
+import universities from '../utils/universities'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import axios_util from '../utils/axios_util'
 
-
-const notify = (message) => toast.dark(
-    message,
-    {
-        position: "top-right",
-        autoClose: 2500,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: false,
-        progress: 0,
-    }
-);
 
 export default function Login() {
 
+    const Router = useRouter();
     const PAGETYPES = {
         LOGIN: 'LOGIN',
         REGISTER: 'REGISTER',
@@ -44,6 +33,39 @@ export default function Login() {
     const [resgisterType, setRegisterType] = useState(RESGISTER_TYPES.STAGE1);
     const [recoveryType, setRecoveryType] = useState(RECOVERY_TYPES.STAGE1);
     const [showUniversities, setShowUniversities] = useState(true);
+
+
+    const [signupUserName, setSignupUserName] = useState("");
+    const [signupEmail, setSignupEmail] = useState("");
+    const [signupPassword, setSignupPassword] = useState("");
+    const [signupPasswordConfirmation, setSignupPasswordConfirmation] = useState("");
+
+
+    const notify = (message) => toast.dark(
+        message,
+        {
+            position: "top-right",
+            autoClose: 2500,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: false,
+            progress: 0,
+        }
+    );
+
+
+
+    const signup = async (username, email, university_name, password, confirm_password) => {
+        console.log("kjsafkjas");
+        if (password !== confirm_password) {
+            notify('Passwords doesn\'t match!');
+            return;
+        }
+    }
+
+
+
     return (
         <div className={styles.container}>
             <div className={styles.icon_container}>
@@ -61,6 +83,7 @@ export default function Login() {
                         <div className={styles.login_input_prompt}>
                             Email
                         </div>
+
                         <div className={styles.login_input_container}>
                             <input
                                 type="text"
@@ -88,6 +111,7 @@ export default function Login() {
                     <div className={styles.login_button_container}>
                         <div className={styles.login_button} onClick={() => {
                             notify('Login Pressed');
+                            Router.push('/home');
                         }}>
                             Login
                         </div>
@@ -125,6 +149,7 @@ export default function Login() {
                                     type="text"
                                     placeholder="Name"
                                     spellCheck="false"
+                                    onChange={(username)=>{setSignupUserName(username)}}
                                 />
                             </div>
                         </div>
@@ -141,6 +166,7 @@ export default function Login() {
                                     type="text"
                                     placeholder="Email"
                                     spellCheck="false"
+                                    onChange={(useremail)=>{setSignupEmail(useremail)}}
                                 />
                             </div>
                         </div>
@@ -161,6 +187,7 @@ export default function Login() {
                                     onClick={() => {
                                         setShowUniversities(!showUniversities);
                                     }}
+                                    onChange={()=>{}}
                                 />
                             </div>
                         </div>
@@ -178,6 +205,7 @@ export default function Login() {
                                             setShowUniversities(false);
                                             setSelectedUniversity(current)
                                         }}
+
                                     >{current}</div>)
                             }
                         </div>
@@ -196,6 +224,8 @@ export default function Login() {
                                 <input type="password"
                                     placeholder="Password" spellCheck="false"
                                     autoComplete="new-password"
+                                    onChange={(password)=>{setSignupPassword(password)}}
+
                                 />
                             </div>
                         </div>
@@ -213,6 +243,7 @@ export default function Login() {
                                 <input type="password"
                                     placeholder="confirm password" spellCheck="false"
                                     autoComplete="new-password"
+                                    onChange={(confirm_password)=>{setSignupPasswordConfirmation(confirm_password)}}
                                 />
                             </div>
                         </div>
@@ -359,7 +390,7 @@ export default function Login() {
                 <div className={styles.tagline}>
                     Connecting the students of Bangladesh.
                 </div>
-                <div className={styles.learn_more_link} onClick={() => { }}>
+                <div className={styles.learn_more_link} onClick={() => {Router.push('learn-more')}}>
                     Learn More
                 </div>
             </div>
