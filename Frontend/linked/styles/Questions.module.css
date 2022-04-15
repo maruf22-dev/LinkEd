@@ -24,8 +24,7 @@
 }
 
 .icon_container img {
-    height: 10vh;
-    border-radius: 50%;
+    height: 12vh;
     padding-left: 20px;
     cursor: pointer;
 }

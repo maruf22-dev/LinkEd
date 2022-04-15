@@ -5,6 +5,7 @@ import styles from '../styles/Login.module.css'
 import universities from '../utils/universities'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import { v4 as uuid } from 'uuid'
 import axios_util from '../utils/axios_util'
 
 
@@ -34,6 +35,8 @@ export default function Login() {
     const [recoveryType, setRecoveryType] = useState(RECOVERY_TYPES.STAGE1);
     const [showUniversities, setShowUniversities] = useState(true);
 
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
     const [signupUserName, setSignupUserName] = useState("");
     const [signupEmail, setSignupEmail] = useState("");
@@ -57,11 +60,23 @@ export default function Login() {
 
 
     const signup = async (username, email, university_name, password, confirm_password) => {
-        console.log("kjsafkjas");
         if (password !== confirm_password) {
             notify('Passwords doesn\'t match!');
             return;
         }
+
+        await axios_util("/add-user", {
+            profilePic: '/user_profile.jpg',
+            userID: ("user_" + uuid()),
+            username: username,
+            email: email,
+            university: university_name,
+            password: password,
+            bio: null,
+            skills: null,
+        })
+        notify(`new account created,\nwelcome ${username}`);
+
     }
 
 
@@ -89,6 +104,8 @@ export default function Login() {
                                 type="text"
                                 placeholder="Email"
                                 spellCheck="false"
+                                onChange={(email) => { setEmail(email.target.value) }}
+
                             />
                         </div>
                     </div>
@@ -100,6 +117,7 @@ export default function Login() {
                             <input type="password"
                                 placeholder="Password" spellCheck="false"
                                 autoComplete="new-password"
+                                onChange={(password) => { setPassword(password.target.value) }}
                             />
                         </div>
                     </div>
@@ -109,9 +127,28 @@ export default function Login() {
                         </div>
                     </div>
                     <div className={styles.login_button_container}>
-                        <div className={styles.login_button} onClick={() => {
-                            notify('Login Pressed');
-                            Router.push('/home');
+                        <div className={styles.login_button} onClick={async () => {
+
+                            let data = await axios_util('/verify_login_info', {
+                                email: email,
+                                password: password
+                            });
+
+                            if (data.status === 200 && email === 'admin') {
+                                Router.push('/admin');
+                            }
+                            else if (data.status === 200) {
+                                Router.push('/home');
+                            }
+                            else if (data.status === 304) {
+                                notify(`This email is not registered`);
+                            }
+                            else if (data.status === 305) {
+                                notify(`password does not match`);
+                            }
+                            else {
+                                notify(`Internal Server Error.`);
+                            }
                         }}>
                             Login
                         </div>
@@ -149,7 +186,7 @@ export default function Login() {
                                     type="text"
                                     placeholder="Name"
                                     spellCheck="false"
-                                    onChange={(username)=>{setSignupUserName(username)}}
+                                    onChange={(username) => { setSignupUserName(username.target.value) }}
                                 />
                             </div>
                         </div>
@@ -166,7 +203,7 @@ export default function Login() {
                                     type="text"
                                     placeholder="Email"
                                     spellCheck="false"
-                                    onChange={(useremail)=>{setSignupEmail(useremail)}}
+                                    onChange={(useremail) => { setSignupEmail(useremail.target.value) }}
                                 />
                             </div>
                         </div>
@@ -187,7 +224,7 @@ export default function Login() {
                                     onClick={() => {
                                         setShowUniversities(!showUniversities);
                                     }}
-                                    onChange={()=>{}}
+                                    onChange={() => { }}
                                 />
                             </div>
                         </div>
@@ -224,7 +261,7 @@ export default function Login() {
                                 <input type="password"
                                     placeholder="Password" spellCheck="false"
                                     autoComplete="new-password"
-                                    onChange={(password)=>{setSignupPassword(password)}}
+                                    onChange={(password) => { setSignupPassword(password.target.value) }}
 
                                 />
                             </div>
@@ -243,7 +280,7 @@ export default function Login() {
                                 <input type="password"
                                     placeholder="confirm password" spellCheck="false"
                                     autoComplete="new-password"
-                                    onChange={(confirm_password)=>{setSignupPasswordConfirmation(confirm_password)}}
+                                    onChange={(confirm_password) => { setSignupPasswordConfirmation(confirm_password.target.value) }}
                                 />
                             </div>
                         </div>
@@ -255,19 +292,22 @@ export default function Login() {
                         <div className={styles.login_box_signup_prompt}>
                             Already have an account?
                         </div>
-                        <div className={styles.login_box_signup_button} onClick={() => { setPageType(PAGETYPES.LOGIN) }}>
+                        <div className={styles.login_box_signup_button} onClick={async () => {
+                            setPageType(PAGETYPES.LOGIN)
+                        }}>
                             Sign in
                         </div>
                     </div>
 
                     <div className={styles.login_button_container}>
-                        <div className={styles.login_button} onClick={() => {
+                        <div className={styles.login_button} onClick={async () => {
 
                             if (resgisterType === RESGISTER_TYPES.STAGE1)
                                 setRegisterType(RESGISTER_TYPES.STAGE2);
                             else if (resgisterType === RESGISTER_TYPES.STAGE2)
                                 setRegisterType(RESGISTER_TYPES.STAGE3);
                             else {
+                                await signup(signupUserName, signupEmail, selectedUniversity, signupPassword, signupPasswordConfirmation);
                                 setRegisterType(RESGISTER_TYPES.STAGE1);
                                 setPageType(PAGETYPES.LOGIN);
                             }
@@ -390,7 +430,7 @@ export default function Login() {
                 <div className={styles.tagline}>
                     Connecting the students of Bangladesh.
                 </div>
-                <div className={styles.learn_more_link} onClick={() => {Router.push('learn-more')}}>
+                <div className={styles.learn_more_link} onClick={() => { Router.push('learn-more') }}>
                     Learn More
                 </div>
             </div>

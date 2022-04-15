@@ -1,0 +1,170 @@
+.container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #36393f;
+  color: #b8b8b8;
+  height: 100%;
+  max-height: 100%;
+  min-height: 100%;
+  width: 100%;
+  max-width: 100%;
+  min-width: 100%;
+  padding-top: 1px;
+  font-size: large;
+
+}
+
+.navbar {
+  height: 18vh;
+  width: 100%;
+  min-height: max-content;
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid #535353;
+  align-items: center;
+}
+
+.logo_box {
+  height: 100%;
+  width: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.logo_box img {
+  height: 100%;
+  cursor: pointer;
+}
+
+.main {
+  margin-top: 2vh;
+  background-color: #202225;
+  width: 30vw;
+  padding-top: 10px;
+  border-radius: 10px;
+}
+
+.search_bar_container {
+  margin: auto;
+  height: 10vh;
+  width: 90%;
+  display: flex;
+}
+
+.search_bar_container input {
+  width: 100%;
+  height: 80%;
+  border-radius: 10px;
+  text-align: center;
+  background-color: #2B2E33;
+  outline: none;
+  border: 1px solid #535353;
+  color: #b8b8b8;
+  cursor: pointer;
+}
+
+.search_result_container, .history_container {
+  height: 65vh;
+  overflow-y: scroll;
+  width: 100%;
+  padding: 20px;
+}
+
+.search_result_container::-webkit-scrollbar {
+  display: none;
+}
+
+.history_container::-webkit-scrollbar {
+  display: none;
+}
+
+.search_result, .history {
+  height: fit-content;
+  width: 100%;
+  background-color: #2B2E33;
+  margin: auto;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #535353;
+  cursor: pointer;
+}
+
+.time_container {
+  margin-left: auto;
+}
+
+.profile_pic img {
+  height: 7vh;
+  border-radius: 50%;
+  margin: 10px;
+}
+
+.bottom {
+  display: flex;
+  flex-direction: row;
+}
+
+.chat {
+  margin: auto;
+  background-color: #202225;
+  margin-top: 2vh;
+  height: 75vh;
+  width: 65%;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.chat_main {
+  height: 85%;
+  background-color: #2B2E33;
+  margin-bottom: 10px;
+  border-radius: 10px;
+}
+
+.chat_bottom {
+  border-radius: 10px;
+  height: 15%;
+  background-color: #2B2E33;
+  display: flex;
+  flex-direction: row;
+}
+
+.messageContainer {
+  height: 100%;
+  padding: 10px;
+  overflow-y: scroll;
+}
+
+.message {
+  background-color: #18191b;
+  width: 80%;
+  margin: auto;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  padding: 5px;
+}
+.message_top
+{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.profile_name {
+  padding: 10px;
+}
+
+.message_text {
+  padding: 10px;
+  background-color: #36393f;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 5px;
+}

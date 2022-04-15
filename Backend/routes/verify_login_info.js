@@ -1,5 +1,6 @@
 const express = require('express')
 let route = express.Router()
+const db = require("../utils/config")
 
 route.post('/',
     async function (req, res) {
@@ -12,11 +13,26 @@ route.post('/',
 
 
         // Dummy Logic
-        let email = 'maruf@gmail.com';
-        let password = 'password123';
+        let email = null;
+        let password = null;
+        let user = null;
+        const users = db.collection('users');
+
+        const snapshot = await users.get();
+        snapshot.forEach((user) => {
+            if (user.data().email === toBeAuthinticated.email) {
+                email = user.data().email;
+                password = user.data().password;
+                user = user.data();
+            }
+        });
+
+
+
+
 
         // email not found in database
-        if (email !== toBeAuthinticated.email) {
+        if (email === null) {
             response =
             {
                 status: 304,
@@ -27,7 +43,7 @@ route.post('/',
         else if (password !== toBeAuthinticated.password) {
             response =
             {
-                status: 304,
+                status: 305,
                 state: 'PASS_NOT_MATCHED'
             }
         }
@@ -36,8 +52,8 @@ route.post('/',
             response =
             {
                 status: 200,
-                state: 'PASS_NOT_MATCHED',
-                user: toBeAuthinticated,
+                state: 'PASS_MATCHED',
+                user: user,
             }
 
         }

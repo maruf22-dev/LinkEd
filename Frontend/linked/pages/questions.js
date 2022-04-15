@@ -95,12 +95,12 @@ const questions = () => {
         <div className={styles.container}>
             <div className={styles.icon_container}>
                 <div>
-                    <img src="/home.jpg" alt="" onClick={()=>{
+                    <img src="/demo_logo.png" alt="" onClick={() => {
                         Router.push('/home');
-                    }}  />
+                    }} />
                 </div>
                 <div>
-                    <img src="/user_profile.jpg" alt="" onClick={()=>{
+                    <img src="/user_profile.jpg" alt="" onClick={() => {
                         Router.push('/profile');
                     }} />
                 </div>
@@ -116,9 +116,9 @@ const questions = () => {
                         Add a question to your universitiy portal
                     </div>
                     <div className={styles.add_question_button}>
-                        <img src="/plus_logo.png" alt="" onClick={()=>{
-                        Router.push('/addQuestions');
-                    }} />
+                        <img src="/plus_logo.png" alt="" onClick={() => {
+                            Router.push('/addQuestions');
+                        }} />
                     </div>
                 </div>
                 {
@@ -128,10 +128,10 @@ const questions = () => {
                             {
                                 questionLinks.map((current, index) =>
                                     <div key={index} className={styles.question_list_item}>
-                                        <div className={styles.question_link} 
-                                        onClick={()=>{
-                                            Router.push(current.link);
-                                        }}>
+                                        <div className={styles.question_link}
+                                            onClick={() => {
+                                                Router.push(current.link);
+                                            }}>
                                             {current.link}
                                         </div>
                                         <div className={styles.question_date}>
